@@ -1,0 +1,547 @@
+ {
+  "export_type": "workflow",
+  "projects": [],
+  "tray_export_version": 3,
+  "workflows": [
+    {
+      "id": "e85f5863-5ba7-4b02-b187-784e4996e086",
+      "created": "2021-05-24T14:20:12.835Z",
+      "workspace_id": "7e68ff59-e3a5-4dde-9d53-a98ab4e3fbd6",
+      "creator": "7e68ff59-e3a5-4dde-9d53-a98ab4e3fbd6",
+      "version": {
+        "id": "9b914c00-2dfe-4547-b601-df4204cb98fd",
+        "created": "2021-06-01T04:37:56.133Z"
+      },
+      "title": "Create LinkedIn Campaign Workflow",
+      "enabled": true,
+      "tags": [],
+      "settings": {
+        "config": {
+          "NotDefined": "NotDefined"
+        },
+        "input_schema": {},
+        "output_schema": {}
+      },
+      "steps_structure": [
+        {
+          "name": "trigger",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-2",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "file-helpers-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-3",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "script-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "script-2",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "linkedin-1",
+          "type": "branch",
+          "content": {
+            "error": [
+              {
+                "name": "callable-workflow-response-2",
+                "type": "normal",
+                "content": {}
+              }
+            ],
+            "success": [
+              {
+                "name": "callable-workflow-response-1",
+                "type": "normal",
+                "content": {}
+              }
+            ]
+          }
+        },
+        {
+          "name": "terminate-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "date-time-helpers-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "script-3",
+          "type": "normal",
+          "content": {}
+        }
+      ],
+      "steps": {
+        "script-1": {
+          "title": "Javascript StartDate",
+          "connector": {
+            "name": "script",
+            "version": "3.0"
+          },
+          "operation": "execute",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "variables": {
+              "type": "array",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "name": {
+                      "type": "string",
+                      "value": "foo"
+                    },
+                    "value": {
+                      "type": "jsonpath",
+                      "value": "$.steps.object-helpers-1.result.variables.LI_adSetStartTime.value"
+                    }
+                  }
+                }
+              ]
+            },
+            "script": {
+              "type": "string",
+              "value": "// You can reference the input variables using input.NAME\n// Parsed JSON files could be referenced as fileInput\nexports.step = function(input, fileInput) {\nvar str = input.foo;\nvar jsonArray = '{\"required\":1, \"minlength\":2}'\nvar jsonParsedArray = JSON.parse(jsonArray);\nvar tmp=str.split(' ');\nvar date= tmp[0];\nvar time= tmp[1]\nvar dateArr = date.split('/');\nvar splitTime=time.split(':');\nvar val1 =dateArr[2] + \"-\" + dateArr[1] + \"-\" + dateArr[0] + \" \" + splitTime[0] + \":\" + splitTime[1];\n\treturn val1 ;\n};"
+            },
+            "file_output": {
+              "type": "boolean",
+              "value": false
+            }
+          }
+        },
+        "object-helpers-2": {
+          "title": "Get Param JsonFile",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "get_value_by_key",
+          "output_schema": {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "string"
+              }
+            }
+          },
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.trigger.data"
+            },
+            "key": {
+              "type": "string",
+              "value": "trigger_input"
+            },
+            "default": {
+              "type": "string",
+              "value": "string"
+            }
+          }
+        },
+        "callable-workflow-response-1": {
+          "title": "Callable response Success",
+          "connector": {
+            "name": "callable-workflow-response",
+            "version": "1.0"
+          },
+          "operation": "response",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "response": {
+              "type": "jsonpath",
+              "value": "$.steps.linkedin-1.id"
+            }
+          }
+        },
+        "script-3": {
+          "title": "Javascript DataFix",
+          "connector": {
+            "name": "script",
+            "version": "3.0"
+          },
+          "operation": "execute",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "variables": {
+              "type": "array",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "name": {
+                      "type": "string",
+                      "value": "jsonStr"
+                    },
+                    "value": {
+                      "type": "jsonpath",
+                      "value": "$.steps.file-helpers-1.result"
+                    }
+                  }
+                }
+              ]
+            },
+            "script": {
+              "type": "string",
+              "value": "// You can reference the input variables using input.NAME\n// Parsed JSON files could be referenced as fileInput\nexports.step = function(input, fileInput) {\nvar tmpObj = JSON.parse(input.jsonStr);\ntmpObj['variables']['LI_country'].value='US';\ntmpObj['variables']['LI_language'].value='en';\ntmpObj['variables']['LI_campaignBudget'].value='100';\ntmpObj['variables']['LI_unitCostBidAmount'].value='10';\ntmpObj['variables']['LI_currency'].value='GBP';\ntmpObj['variables']['LI_costType'].value='CPM';\ntmpObj['name']='LinkedIn Single Image Ad 21-May-21 5:44 PM'\nvar retJson = JSON.stringify(tmpObj);\nreturn retJson ;\n};"
+            },
+            "file_output": {
+              "type": "boolean",
+              "value": false
+            }
+          }
+        },
+        "object-helpers-3": {
+          "title": "Targeting Criteria JSON",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "json_parse",
+          "output_schema": {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "object",
+                "properties": {
+                  "include": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "match_any_group": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "facet_urn": {
+                                "type": "string"
+                              },
+                              "facet_values": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "string",
+              "value": "{\n  \"include\": [\n    {\n      \"match_any_group\": [\n        {\n          \"facet_urn\": \"urn:li:adTargetingFacet:locations\",\n          \"facet_values\": [\n            \"urn:li:geo:102713980\"\n          ]\n        }\n      ]\n    }\n  ]\n}"
+            }
+          }
+        },
+        "linkedin-1": {
+          "title": "Linkedin Create Campaign",
+          "connector": {
+            "name": "linkedin",
+            "version": "5.1"
+          },
+          "operation": "create_ad_campaign",
+          "output_schema": {},
+          "error_handling": {
+            "strategy": "manual"
+          },
+          "authentication": {
+            "group": "7adc9b0e-d239-439f-a7d9-bdd86ab37191",
+            "title": "Shijith1 LinkedIn account",
+            "service_icon": {
+              "icon_type": "url",
+              "value": "//s3.amazonaws.com/images.tray.io/artisan/icons/f1576406b382b7d1c8c2607f7c563d4f.png"
+            },
+            "service_id": "6d6352ad-348d-40f3-9f77-283a76ebadd8",
+            "auth_app_id": "e58f06ab-eebf-4150-b8e7-e62b9239c756",
+            "scopes": [
+              "rw_ads",
+              "r_ads_reporting",
+              "r_emailaddress",
+              "rw_organization",
+              "rw_dmp_segments",
+              "r_ads_leadgen_automation",
+              "rw_organization_admin",
+              "r_organization_social",
+              "r_1st_connections_size",
+              "r_basicprofile",
+              "w_organization_social",
+              "r_liteprofile",
+              "w_member_social",
+              "r_ads"
+            ]
+          },
+          "properties": {
+            "objective_type": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-1.result.variables.LI_objective.value"
+            },
+            "campaign_status": {
+              "type": "string",
+              "value": "ACTIVE"
+            },
+            "audience_expansion_enabled": {
+              "type": "boolean",
+              "value": true
+            },
+            "unit_cost": {
+              "value": {
+                "amount": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-1.result.variables.LI_unitCostBidAmount.value"
+                },
+                "currency_code": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-1.result.variables.LI_currency.value"
+                }
+              },
+              "type": "object"
+            },
+            "campaign_type": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-1.result.variables.LI_campaignType.value"
+            },
+            "daily_budget": {
+              "value": {
+                "amount": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-1.result.variables.LI_campaignBudget.value"
+                },
+                "currency_code": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-1.result.variables.LI_currency.value"
+                }
+              },
+              "type": "object"
+            },
+            "run_schedule": {
+              "value": {
+                "start": {
+                  "type": "jsonpath",
+                  "value": "$.steps.script-1.result"
+                },
+                "end": {
+                  "type": "jsonpath",
+                  "value": "$.steps.script-2.result"
+                }
+              },
+              "type": "object"
+            },
+            "name": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-1.result.name"
+            },
+            "cost_type": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-1.result.variables.LI_costType.value"
+            },
+            "account": {
+              "value": "urn:li:sponsoredAccount:508569849",
+              "type": "string"
+            },
+            "targeting_criteria": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-3.result"
+            },
+            "campaign_group": {
+              "value": "urn:li:sponsoredCampaignGroup:612752086",
+              "type": "string"
+            },
+            "locale": {
+              "value": {
+                "country": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-1.result.variables.LI_country.value"
+                },
+                "language": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-1.result.variables.LI_language.value"
+                }
+              },
+              "type": "object"
+            },
+            "access_token": {
+              "type": "jsonpath",
+              "value": "$.auth.access_token"
+            }
+          }
+        },
+        "terminate-1": {
+          "title": "Terminate",
+          "connector": {
+            "name": "terminate",
+            "version": "1.0"
+          },
+          "operation": "terminate_run",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {}
+        },
+        "callable-workflow-response-2": {
+          "title": "Callable response Failure",
+          "connector": {
+            "name": "callable-workflow-response",
+            "version": "1.0"
+          },
+          "operation": "response",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "response": {
+              "type": "jsonpath",
+              "value": "$.steps.linkedin-1.success"
+            }
+          }
+        },
+        "date-time-helpers-1": {
+          "title": "Date & Time Helpers",
+          "connector": {
+            "name": "date-time-helpers",
+            "version": "3.0"
+          },
+          "operation": "format",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "date": {
+              "type": "string",
+              "value": "2021-05-24 17:51"
+            },
+            "format": {
+              "type": "object",
+              "value": {
+                "existing_format": {
+                  "type": "string",
+                  "value": ""
+                }
+              }
+            },
+            "timezone": {
+              "type": "string",
+              "value": "UTC"
+            }
+          }
+        },
+        "object-helpers-1": {
+          "title": "JSON Parse",
+          "description": "Convert string to JSON object",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "json_parse",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.file-helpers-1.result"
+            }
+          }
+        },
+        "script-2": {
+          "title": "Javascript EndDate",
+          "connector": {
+            "name": "script",
+            "version": "3.0"
+          },
+          "operation": "execute",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "variables": {
+              "type": "array",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "name": {
+                      "type": "string",
+                      "value": "foo"
+                    },
+                    "value": {
+                      "type": "jsonpath",
+                      "value": "$.steps.object-helpers-1.result.variables.LI_adSetEndTime.value"
+                    }
+                  }
+                }
+              ]
+            },
+            "script": {
+              "type": "string",
+              "value": "// You can reference the input variables using input.NAME\n// Parsed JSON files could be referenced as fileInput\nexports.step = function(input, fileInput) {\nvar str = input.foo;\nvar tmp=str.split(' ');\nvar date= tmp[0];\nvar time= tmp[1]\nvar dateArr = date.split('/');\nvar splitTime=time.split(':');\nvar val1 =dateArr[2] + \"-\" + dateArr[1] + \"-\" + dateArr[0] + \" \" + splitTime[0] + \":\" + splitTime[1];\n\treturn val1 ;\n};"
+            },
+            "file_output": {
+              "type": "boolean",
+              "value": false
+            }
+          }
+        },
+        "file-helpers-1": {
+          "title": "Read JSON File As String",
+          "connector": {
+            "name": "file-helpers",
+            "version": "2.1"
+          },
+          "operation": "read_file_contents",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "url": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-2.result.url"
+            }
+          }
+        },
+        "trigger": {
+          "title": "Callable Trigger",
+          "connector": {
+            "name": "callable-trigger",
+            "version": "2.0"
+          },
+          "operation": "trigger_and_respond",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {}
+        }
+      },
+      "dependencies": []
+    }
+  ]
+}

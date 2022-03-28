@@ -1,0 +1,1135 @@
+ {
+  "export_type": "workflow",
+  "projects": [],
+  "tray_export_version": 3,
+  "workflows": [
+    {
+      "id": "b0a60e03-9be4-4ede-b0d5-24d6ddd1ac1d",
+      "created": "2021-05-25T06:21:17.488Z",
+      "workspace_id": "7e68ff59-e3a5-4dde-9d53-a98ab4e3fbd6",
+      "creator": "7e68ff59-e3a5-4dde-9d53-a98ab4e3fbd6",
+      "version": {
+        "id": "086e9700-2f24-43e6-8ed6-0f34a2e19bcd",
+        "created": "2021-05-27T15:58:06.047Z"
+      },
+      "title": "Create LinkedIn Single Image Ad Workflow",
+      "enabled": true,
+      "tags": [],
+      "settings": {
+        "config": {},
+        "input_schema": {},
+        "output_schema": {}
+      },
+      "steps_structure": [
+        {
+          "name": "trigger",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-2",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-6",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-7",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "file-helpers-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-8",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "list-helpers-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "text-helpers-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "http-client-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-3",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "http-client-2",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "text-helpers-2",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "text-helpers-5",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "text-helpers-6",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "text-helpers-7",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-4",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "http-client-3",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "text-helpers-3",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "text-helpers-4",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "object-helpers-5",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "http-client-4",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "callable-workflow-response-1",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "terminate-1",
+          "type": "normal",
+          "content": {}
+        }
+      ],
+      "steps": {
+        "object-helpers-8": {
+          "title": "JSON Parse",
+          "description": "Convert string to JSON object",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "json_parse",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.file-helpers-1.result"
+            }
+          }
+        },
+        "object-helpers-2": {
+          "title": "Get Param FileList",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "get_value_by_key",
+          "output_schema": {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "array",
+                "items": {}
+              }
+            }
+          },
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.trigger.data"
+            },
+            "key": {
+              "type": "string",
+              "value": "trigger_input"
+            },
+            "default": {
+              "type": "array",
+              "value": []
+            }
+          }
+        },
+        "http-client-3": {
+          "title": "Http Client - Create Shares Im",
+          "connector": {
+            "name": "http-client",
+            "version": "5.3"
+          },
+          "operation": "post_request",
+          "output_schema": {},
+          "error_handling": {},
+          "authentication": {
+            "group": "7adc9b0e-d239-439f-a7d9-bdd86ab37191",
+            "title": "Shijith1 LinkedIn account",
+            "service_icon": {
+              "icon_type": "url",
+              "value": "//s3.amazonaws.com/images.tray.io/artisan/icons/f1576406b382b7d1c8c2607f7c563d4f.png"
+            },
+            "service_id": "6d6352ad-348d-40f3-9f77-283a76ebadd8",
+            "auth_app_id": "e58f06ab-eebf-4150-b8e7-e62b9239c756",
+            "scopes": [
+              "rw_ads",
+              "r_ads_reporting",
+              "r_emailaddress",
+              "rw_organization",
+              "rw_dmp_segments",
+              "r_ads_leadgen_automation",
+              "rw_organization_admin",
+              "r_organization_social",
+              "r_1st_connections_size",
+              "r_basicprofile",
+              "w_organization_social",
+              "r_liteprofile",
+              "w_member_social",
+              "r_ads"
+            ]
+          },
+          "properties": {
+            "body": {
+              "type": "object",
+              "value": {
+                "raw": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-4.result"
+                }
+              }
+            },
+            "queries": {
+              "type": "array",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "key": {
+                      "type": "string",
+                      "value": "oauth2_access_token"
+                    },
+                    "value": {
+                      "type": "string",
+                      "value": "{$.auth.access_token}"
+                    }
+                  }
+                }
+              ]
+            },
+            "headers": {
+              "type": "array",
+              "value": []
+            },
+            "auth": {
+              "type": "object",
+              "value": {
+                "none": {
+                  "type": "null",
+                  "value": null
+                }
+              }
+            },
+            "follow_redirect": {
+              "type": "boolean",
+              "value": false
+            },
+            "parse_response": {
+              "type": "string",
+              "value": "true"
+            },
+            "follow_keep_method": {
+              "type": "boolean",
+              "value": false
+            },
+            "url": {
+              "type": "string",
+              "value": "https://api.linkedin.com/v2/shares"
+            },
+            "reject_unauthorized": {
+              "type": "boolean",
+              "value": true
+            },
+            "status_code": {
+              "type": "object",
+              "value": {
+                "range": {
+                  "type": "object",
+                  "value": {
+                    "from": {
+                      "type": "integer",
+                      "value": 200
+                    },
+                    "to": {
+                      "type": "integer",
+                      "value": 299
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "text-helpers-5": {
+          "title": "Replace text",
+          "connector": {
+            "name": "text-helpers",
+            "version": "1.15"
+          },
+          "operation": "replace",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "replace_all": {
+              "type": "boolean",
+              "value": true
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "value": true
+            },
+            "text": {
+              "type": "jsonpath",
+              "value": "$.steps.text-helpers-2.result"
+            },
+            "pattern": {
+              "type": "string",
+              "value": "~text~"
+            },
+            "replacement": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-8.result.variables.LI_adDescription.value"
+            }
+          }
+        },
+        "object-helpers-5": {
+          "title": "JSON Parse",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "json_parse",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.text-helpers-4.result"
+            }
+          }
+        },
+        "text-helpers-1": {
+          "title": "Replace Owner",
+          "connector": {
+            "name": "text-helpers",
+            "version": "1.15"
+          },
+          "operation": "replace",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "replace_all": {
+              "type": "boolean",
+              "value": true
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "value": true
+            },
+            "text": {
+              "type": "string",
+              "value": "{\n   \"registerUploadRequest\":{\n      \"owner\":\"~~\",\n      \"recipes\":[\n         \"urn:li:digitalmediaRecipe:feedshare-image\"\n      ],\n      \"serviceRelationships\":[\n         {\n            \"identifier\":\"urn:li:userGeneratedContent\",\n            \"relationshipType\":\"OWNER\"\n         }\n      ],\n      \"supportedUploadMechanism\":[\n         \"SYNCHRONOUS_UPLOAD\"\n      ]\n   }\n}\n\n"
+            },
+            "pattern": {
+              "type": "string",
+              "value": "~~"
+            },
+            "replacement": {
+              "type": "string",
+              "value": "urn:li:company:71053901"
+            }
+          }
+        },
+        "callable-workflow-response-1": {
+          "title": "Callable response",
+          "connector": {
+            "name": "callable-workflow-response",
+            "version": "1.0"
+          },
+          "operation": "response",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "response": {
+              "type": "jsonpath",
+              "value": "$.steps.http-client-4.response.body"
+            }
+          }
+        },
+        "text-helpers-4": {
+          "title": "Replace CampaignId",
+          "connector": {
+            "name": "text-helpers",
+            "version": "1.15"
+          },
+          "operation": "replace",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "replace_all": {
+              "type": "boolean",
+              "value": true
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "value": true
+            },
+            "text": {
+              "type": "jsonpath",
+              "value": "$.steps.text-helpers-3.result"
+            },
+            "pattern": {
+              "type": "string",
+              "value": "~!~"
+            },
+            "replacement": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-6.result"
+            }
+          }
+        },
+        "object-helpers-3": {
+          "title": "Get uploadUrl value",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "get_value_by_key",
+          "output_schema": {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "string"
+              }
+            }
+          },
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.http-client-1.response.body.value.uploadMechanism.['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']"
+            },
+            "key": {
+              "type": "string",
+              "value": "uploadUrl"
+            },
+            "default": {
+              "type": "string",
+              "value": "string"
+            }
+          }
+        },
+        "object-helpers-7": {
+          "title": "Get Param JsonFile",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "get_value_by_key",
+          "output_schema": {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.trigger.data"
+            },
+            "key": {
+              "type": "string",
+              "value": "MetadataJson"
+            },
+            "default": {
+              "type": "object",
+              "value": {}
+            }
+          }
+        },
+        "http-client-4": {
+          "title": "Http Client - Create sponsorAd",
+          "connector": {
+            "name": "http-client",
+            "version": "5.3"
+          },
+          "operation": "post_request",
+          "output_schema": {},
+          "error_handling": {},
+          "authentication": {
+            "group": "7adc9b0e-d239-439f-a7d9-bdd86ab37191",
+            "title": "Shijith1 LinkedIn account",
+            "service_icon": {
+              "icon_type": "url",
+              "value": "//s3.amazonaws.com/images.tray.io/artisan/icons/f1576406b382b7d1c8c2607f7c563d4f.png"
+            },
+            "service_id": "6d6352ad-348d-40f3-9f77-283a76ebadd8",
+            "auth_app_id": "e58f06ab-eebf-4150-b8e7-e62b9239c756",
+            "scopes": [
+              "rw_ads",
+              "r_ads_reporting",
+              "r_emailaddress",
+              "rw_organization",
+              "rw_dmp_segments",
+              "r_ads_leadgen_automation",
+              "rw_organization_admin",
+              "r_organization_social",
+              "r_1st_connections_size",
+              "r_basicprofile",
+              "w_organization_social",
+              "r_liteprofile",
+              "w_member_social",
+              "r_ads"
+            ]
+          },
+          "properties": {
+            "body": {
+              "type": "object",
+              "value": {
+                "raw": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-5.result"
+                }
+              }
+            },
+            "queries": {
+              "type": "array",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "key": {
+                      "type": "string",
+                      "value": "oauth2_access_token"
+                    },
+                    "value": {
+                      "type": "string",
+                      "value": "{$.auth.access_token}"
+                    }
+                  }
+                }
+              ]
+            },
+            "headers": {
+              "type": "array",
+              "value": []
+            },
+            "auth": {
+              "type": "object",
+              "value": {
+                "none": {
+                  "type": "null",
+                  "value": null
+                }
+              }
+            },
+            "follow_redirect": {
+              "type": "boolean",
+              "value": false
+            },
+            "parse_response": {
+              "type": "string",
+              "value": "true"
+            },
+            "follow_keep_method": {
+              "type": "boolean",
+              "value": false
+            },
+            "url": {
+              "type": "string",
+              "value": "https://api.linkedin.com/v2/adCreativesV2"
+            },
+            "reject_unauthorized": {
+              "type": "boolean",
+              "value": true
+            },
+            "status_code": {
+              "type": "object",
+              "value": {
+                "range": {
+                  "type": "object",
+                  "value": {
+                    "from": {
+                      "type": "integer",
+                      "value": 200
+                    },
+                    "to": {
+                      "type": "integer",
+                      "value": 299
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "object-helpers-6": {
+          "title": "Get Param CampaignId",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "get_value_by_key",
+          "output_schema": {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "string"
+              }
+            }
+          },
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.trigger.data"
+            },
+            "key": {
+              "type": "string",
+              "value": "CampaignId"
+            },
+            "default": {
+              "type": "string",
+              "value": "string"
+            }
+          }
+        },
+        "terminate-1": {
+          "title": "Terminate",
+          "connector": {
+            "name": "terminate",
+            "version": "1.0"
+          },
+          "operation": "terminate_run",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {}
+        },
+        "text-helpers-3": {
+          "title": "Replace Share",
+          "connector": {
+            "name": "text-helpers",
+            "version": "1.15"
+          },
+          "operation": "replace",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "replace_all": {
+              "type": "boolean",
+              "value": true
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "value": true
+            },
+            "text": {
+              "type": "string",
+              "value": "{\n    \"campaign\": \"urn:li:sponsoredCampaign:~!~\",\n    \"reference\": \"urn:li:share:~~\",\n    \"status\": \"ACTIVE\",\n    \"type\": \"SPONSORED_STATUS_UPDATE\",\n    \"variables\": {\n        \"data\": {\n            \"com.linkedin.ads.SponsoredUpdateCreativeVariables\": {}\n        }\n    }\n}"
+            },
+            "pattern": {
+              "type": "string",
+              "value": "~~"
+            },
+            "replacement": {
+              "type": "jsonpath",
+              "value": "$.steps.http-client-3.response.body.id"
+            }
+          }
+        },
+        "http-client-1": {
+          "title": "Http Client - Register ImgUpld",
+          "connector": {
+            "name": "http-client",
+            "version": "5.3"
+          },
+          "operation": "post_request",
+          "output_schema": {},
+          "error_handling": {},
+          "authentication": {
+            "group": "7adc9b0e-d239-439f-a7d9-bdd86ab37191",
+            "title": "Shijith1 LinkedIn account",
+            "service_icon": {
+              "icon_type": "url",
+              "value": "//s3.amazonaws.com/images.tray.io/artisan/icons/f1576406b382b7d1c8c2607f7c563d4f.png"
+            },
+            "service_id": "6d6352ad-348d-40f3-9f77-283a76ebadd8",
+            "auth_app_id": "e58f06ab-eebf-4150-b8e7-e62b9239c756",
+            "scopes": [
+              "rw_ads",
+              "r_ads_reporting",
+              "r_emailaddress",
+              "rw_organization",
+              "rw_dmp_segments",
+              "r_ads_leadgen_automation",
+              "rw_organization_admin",
+              "r_organization_social",
+              "r_1st_connections_size",
+              "r_basicprofile",
+              "w_organization_social",
+              "r_liteprofile",
+              "w_member_social",
+              "r_ads"
+            ]
+          },
+          "properties": {
+            "body": {
+              "type": "object",
+              "value": {
+                "raw": {
+                  "type": "jsonpath",
+                  "value": "$.steps.object-helpers-1.result"
+                }
+              }
+            },
+            "queries": {
+              "type": "array",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "key": {
+                      "type": "string",
+                      "value": "oauth2_access_token"
+                    },
+                    "value": {
+                      "type": "string",
+                      "value": "{$.auth.access_token}"
+                    }
+                  }
+                }
+              ]
+            },
+            "headers": {
+              "type": "array",
+              "value": []
+            },
+            "auth": {
+              "type": "object",
+              "value": {
+                "none": {
+                  "type": "null",
+                  "value": null
+                }
+              }
+            },
+            "follow_redirect": {
+              "type": "boolean",
+              "value": false
+            },
+            "parse_response": {
+              "type": "string",
+              "value": "true"
+            },
+            "follow_keep_method": {
+              "type": "boolean",
+              "value": false
+            },
+            "url": {
+              "type": "string",
+              "value": "https://api.linkedin.com/v2/assets?action=registerUpload"
+            },
+            "reject_unauthorized": {
+              "type": "boolean",
+              "value": true
+            },
+            "status_code": {
+              "type": "object",
+              "value": {
+                "range": {
+                  "type": "object",
+                  "value": {
+                    "from": {
+                      "type": "integer",
+                      "value": 200
+                    },
+                    "to": {
+                      "type": "integer",
+                      "value": 299
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "list-helpers-1": {
+          "title": "Filter First Image File",
+          "connector": {
+            "name": "list-helpers",
+            "version": "2.0"
+          },
+          "operation": "find_object_in_list",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "list": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-2.result"
+            },
+            "object_conditions": {
+              "type": "array",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "key": {
+                      "type": "string",
+                      "value": "mime_type"
+                    },
+                    "value": {
+                      "type": "string",
+                      "value": "image/jpeg"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "text-helpers-7": {
+          "title": "Replace title",
+          "connector": {
+            "name": "text-helpers",
+            "version": "1.15"
+          },
+          "operation": "replace",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "replace_all": {
+              "type": "boolean",
+              "value": true
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "value": true
+            },
+            "text": {
+              "type": "jsonpath",
+              "value": "$.steps.text-helpers-6.result"
+            },
+            "pattern": {
+              "type": "string",
+              "value": "~title~"
+            },
+            "replacement": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-8.result.variables.LI_adTitle.value"
+            }
+          }
+        },
+        "object-helpers-4": {
+          "title": "JSON Parse",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "json_parse",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.text-helpers-7.result"
+            }
+          }
+        },
+        "text-helpers-6": {
+          "title": "Replace subject",
+          "connector": {
+            "name": "text-helpers",
+            "version": "1.15"
+          },
+          "operation": "replace",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "replace_all": {
+              "type": "boolean",
+              "value": true
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "value": true
+            },
+            "text": {
+              "type": "jsonpath",
+              "value": "$.steps.text-helpers-5.result"
+            },
+            "pattern": {
+              "type": "string",
+              "value": "~subject~"
+            },
+            "replacement": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-8.result.variables.LI_adLandingPageURL.value"
+            }
+          }
+        },
+        "text-helpers-2": {
+          "title": "Replace Asset",
+          "connector": {
+            "name": "text-helpers",
+            "version": "1.15"
+          },
+          "operation": "replace",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "replace_all": {
+              "type": "boolean",
+              "value": true
+            },
+            "case_sensitive": {
+              "type": "boolean",
+              "value": true
+            },
+            "text": {
+              "type": "string",
+              "value": "{\n  \"owner\": \"urn:li:company:71053901\",\n  \"text\": {\n    \"text\": \"~text~\"\n  },\n  \"subject\": \"~subject~\",\n  \"distribution\": {\n    \"linkedInDistributionTarget\": {}\n  },\n  \"content\": {\n    \"contentEntities\": [\n      {\n        \"entity\": \"~~\"\n      }\n    ],\n    \"title\": \"~title~\",\n    \"shareMediaCategory\": \"IMAGE\"\n  }\n}"
+            },
+            "pattern": {
+              "type": "string",
+              "value": "~~"
+            },
+            "replacement": {
+              "type": "jsonpath",
+              "value": "$.steps.http-client-1.response.body.value.asset"
+            }
+          }
+        },
+        "http-client-2": {
+          "title": "Http Client - Upload image",
+          "connector": {
+            "name": "http-client",
+            "version": "5.3"
+          },
+          "operation": "put_request",
+          "output_schema": {},
+          "error_handling": {},
+          "authentication": {
+            "group": "7adc9b0e-d239-439f-a7d9-bdd86ab37191",
+            "title": "Shijith1 LinkedIn account",
+            "service_icon": {
+              "icon_type": "url",
+              "value": "//s3.amazonaws.com/images.tray.io/artisan/icons/f1576406b382b7d1c8c2607f7c563d4f.png"
+            },
+            "service_id": "6d6352ad-348d-40f3-9f77-283a76ebadd8",
+            "auth_app_id": "e58f06ab-eebf-4150-b8e7-e62b9239c756",
+            "scopes": [
+              "rw_ads",
+              "r_ads_reporting",
+              "r_emailaddress",
+              "rw_organization",
+              "rw_dmp_segments",
+              "r_ads_leadgen_automation",
+              "rw_organization_admin",
+              "r_organization_social",
+              "r_1st_connections_size",
+              "r_basicprofile",
+              "w_organization_social",
+              "r_liteprofile",
+              "w_member_social",
+              "r_ads"
+            ]
+          },
+          "properties": {
+            "body": {
+              "type": "object",
+              "value": {
+                "binary": {
+                  "type": "jsonpath",
+                  "value": "$.steps.list-helpers-1.result"
+                }
+              }
+            },
+            "queries": {
+              "type": "array",
+              "value": []
+            },
+            "headers": {
+              "type": "array",
+              "value": [
+                {
+                  "type": "object",
+                  "value": {
+                    "key": {
+                      "type": "string",
+                      "value": "Authorization"
+                    },
+                    "value": {
+                      "type": "string",
+                      "value": "Bearer {$.auth.access_token}"
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "value": {
+                    "key": {
+                      "type": "string",
+                      "value": "Content-Type"
+                    },
+                    "value": {
+                      "type": "string",
+                      "value": "image/jpg"
+                    }
+                  }
+                }
+              ]
+            },
+            "auth": {
+              "type": "object",
+              "value": {
+                "none": {
+                  "type": "null",
+                  "value": null
+                }
+              }
+            },
+            "follow_redirect": {
+              "type": "boolean",
+              "value": false
+            },
+            "parse_response": {
+              "type": "string",
+              "value": "true"
+            },
+            "follow_keep_method": {
+              "type": "boolean",
+              "value": false
+            },
+            "url": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-3.result"
+            },
+            "reject_unauthorized": {
+              "type": "boolean",
+              "value": true
+            },
+            "status_code": {
+              "type": "object",
+              "value": {
+                "range": {
+                  "type": "object",
+                  "value": {
+                    "from": {
+                      "type": "integer",
+                      "value": 200
+                    },
+                    "to": {
+                      "type": "integer",
+                      "value": 299
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "object-helpers-1": {
+          "title": "JSON Parse",
+          "description": "Convert string to JSON object",
+          "connector": {
+            "name": "object-helpers",
+            "version": "4.1"
+          },
+          "operation": "json_parse",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "source": {
+              "type": "jsonpath",
+              "value": "$.steps.text-helpers-1.result"
+            }
+          }
+        },
+        "file-helpers-1": {
+          "title": "Read JSON File As String",
+          "connector": {
+            "name": "file-helpers",
+            "version": "2.1"
+          },
+          "operation": "read_file_contents",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "url": {
+              "type": "jsonpath",
+              "value": "$.steps.object-helpers-7.result.url"
+            }
+          }
+        },
+        "trigger": {
+          "title": "Callable Trigger",
+          "connector": {
+            "name": "callable-trigger",
+            "version": "2.0"
+          },
+          "operation": "trigger_and_respond",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {}
+        }
+      },
+      "dependencies": []
+    }
+  ]
+}

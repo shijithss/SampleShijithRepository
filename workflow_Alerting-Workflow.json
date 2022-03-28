@@ -1,0 +1,119 @@
+ {
+  "export_type": "workflow",
+  "projects": [],
+  "tray_export_version": 3,
+  "workflows": [
+    {
+      "id": "2bf59ba5-f258-4105-8c3d-b019fda206f9",
+      "created": "2021-05-20T14:22:58.756Z",
+      "workspace_id": "7e68ff59-e3a5-4dde-9d53-a98ab4e3fbd6",
+      "creator": "7e68ff59-e3a5-4dde-9d53-a98ab4e3fbd6",
+      "version": {
+        "id": "324834f2-7ac9-4057-aeb7-efabbdb6054e",
+        "created": "2021-05-25T22:04:25.761Z"
+      },
+      "title": "Alerting Workflow",
+      "enabled": true,
+      "tags": [],
+      "settings": {
+        "config": {},
+        "input_schema": {},
+        "output_schema": {}
+      },
+      "steps_structure": [
+        {
+          "name": "trigger",
+          "type": "normal",
+          "content": {}
+        },
+        {
+          "name": "http-client-1",
+          "type": "normal",
+          "content": {}
+        }
+      ],
+      "steps": {
+        "trigger": {
+          "title": "Alert",
+          "connector": {
+            "name": "alerting-trigger",
+            "version": "1.0"
+          },
+          "operation": "trigger",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {}
+        },
+        "http-client-1": {
+          "title": "Post Error",
+          "connector": {
+            "name": "http-client",
+            "version": "5.3"
+          },
+          "operation": "post_request",
+          "output_schema": {},
+          "error_handling": {},
+          "properties": {
+            "auth": {
+              "type": "object",
+              "value": {
+                "none": {
+                  "type": "null",
+                  "value": null
+                }
+              }
+            },
+            "follow_redirect": {
+              "type": "boolean",
+              "value": false
+            },
+            "parse_response": {
+              "type": "string",
+              "value": "true"
+            },
+            "follow_keep_method": {
+              "type": "boolean",
+              "value": false
+            },
+            "reject_unauthorized": {
+              "type": "boolean",
+              "value": true
+            },
+            "status_code": {
+              "type": "object",
+              "value": {
+                "range": {
+                  "type": "object",
+                  "value": {
+                    "from": {
+                      "type": "integer",
+                      "value": 200
+                    },
+                    "to": {
+                      "type": "integer",
+                      "value": 299
+                    }
+                  }
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "value": "https://zmkq3yfst1.execute-api.us-east-2.amazonaws.com/poc/status"
+            },
+            "body": {
+              "type": "object",
+              "value": {
+                "raw": {
+                  "type": "jsonpath",
+                  "value": "$.steps.trigger.error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "dependencies": []
+    }
+  ]
+}
